@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercizio 4 PHP - Massimo di 3 numeri</title>
+    <title>Gioco cavalli</title>
     <link rel="stylesheet" href="./CSS/style.css">
     <script src="./JS/script.js"></script>
 </head>
@@ -17,12 +17,14 @@
             <button name="scelta_d"><img src="./IMG/bg_d13.gif"></button>
             <button name="scelta_h"><img src="./IMG/bg_h13.gif"></button>
             <button name="scelta_s"><img src="./IMG/bg_s13.gif"></button>
+
+             input non visibile per metterci dentro i dati e utilizzarli dal php 
+            <input type="hidden" id="carte" name="carte" value="">
+            <input type="hidden" id="posizioni" name="posizioni" value="">
         </form>
-        <!-- input non visibile per metterci dentro i dati e utilizzarli dal php -->
-        <input type="hidden" id="carte" value="">
-        <main>
-            <div>
-                <!-- carte girate -->
+        <!-- faccio tutto dritto e poi con il css ruoto di 90° tutto il main -->
+            <!-- <div>
+                carte girate
                 <div></div>
                 <div></div>
                 <div></div>
@@ -32,7 +34,7 @@
                 <div></div>
             </div>
             <div>
-                <!-- seme 1 -->
+                seme 1
                 <div></div>
                 <div></div>
                 <div></div>
@@ -42,7 +44,7 @@
                 <div></div>
             </div>
             <div>
-                <!-- seme 2 -->
+                seme 2
                 <div></div>
                 <div></div>
                 <div></div>
@@ -52,7 +54,7 @@
                 <div></div>
             </div>
             <div>
-                <!-- seme 3 -->
+                seme 3
                 <div></div>
                 <div></div>
                 <div></div>
@@ -62,7 +64,7 @@
                 <div></div>
             </div>
             <div>
-                <!-- seme 4 -->
+                seme 4
                 <div></div>
                 <div></div>
                 <div></div>
@@ -71,8 +73,10 @@
                 <div></div>
                 <div></div>
             </div>
-            <!-- mazzo e carte girate -->
-        </main>
+            <div>
+                <div><img src="./IMG/dorso.JPG"></div>
+                <div><img src="./IMG/bg_c1.gif"></div>
+            </div> -->
     </main>
     <footer>
         Progetto di Isoardi e Filipi

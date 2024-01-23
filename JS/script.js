@@ -17,6 +17,8 @@ window.onload = () => {
         const j = Math.floor(Math.random() * (i + 1));
         [carte[i], carte[j]] = [carte[j], carte[i]];
     }
-    document.getElementById("carte").value = JSON.stringify(carte);
-    // uso JSON.parse per recuperarli      
+    document.getElementById("carte").value = carte.toString();
+
+    initPos = [0,0,0,0];
+    document.getElementById("posizioni").value = initPos.toString();
 }

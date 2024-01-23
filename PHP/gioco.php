@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gioco cavalli</title>
+    <link rel="stylesheet" href="../CSS/gioco.css">
+    <script src="../JS/gioco.js"></script>
 </head>
 
 <body>
@@ -19,34 +21,35 @@
     } else if (isset($_POST['scelta_s'])) {
         $scelta="s";
     }
-    session_start();
-    if (!isset($_SESSION['carte'])) { // se ho appena aperto la pagina allora creo il vettore con i numeri
-        session_destroy();
-        session_start();
-        $_SESSION['carte'] = array();
 
-        $tmp;
-        for($i = 0; $i<4; $i++){
-            $aus = "";
-            switch ($i){
-                case 0: $aus = "c"; break;
-                case 1: $aus = "d"; break;
-                case 2: $aus = "h"; break;
-                case 3: $aus = "s"; break;
-            }
-            for($j = 1; $j<13; $j++){ // va fino a 13 perchè i re li uso come cavalli
-                $tmp = "bg_".$aus.$j;
-                $_SESSION['carte'][] = $tmp;
-            }
-        }
-        shuffle($_SESSION['carte']);
-    }
-    echo implode(',', $_SESSION['carte']);
+    $carte = explode(',', $_POST["carte"]);
+    $posizioni = explode(',', $_POST["posizioni"]);
+
+
+    // tuttiMaggiori($num){
+    //     // se tutte le posizioni sono maggiori di 
+    // }
+    
     ?>
 
    <main>
     <?php
-        
+        for($i=0; $i<5;$i++){
+            echo "<div>";
+            for($j=0; $j<6; $j++){
+                /* if c'è la carta in questa posizione -> stampo la carta (switch tra i semi) */
+                /* else stampo div vuoto (occuperà spazio perchè glielo dico col css) */
+                if($i == 0){
+                    // if(tuttiMaggiori(6-$j))
+                    echo "<div class='card'><img src='../IMG/dorso.JPG'></div>";
+
+                }
+                else
+                    echo "<div class='card'>carta</div>";
+            }
+            echo "</div>";
+        }
+        // qua stampo il mazzo
     ?>
    </main> 
 
