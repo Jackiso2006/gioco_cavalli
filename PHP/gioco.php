@@ -11,8 +11,17 @@
 
 <body>
     <?php
+    $carte = explode(',', $_POST["carte"]);
+    $posizioni = explode(',', $_POST["posizioni"]);
+    $carta_girata = null;
     $scelta = "";
-    if (isset($_POST['scelta_c']))
+
+    // se ho già scelto il seme giro la carta, entro negli else if se sono al primo giro 
+    if(isset($_POST['seme'])){
+        $scelta=$_POST['seme'];
+        giraCarta();
+    }
+    else if (isset($_POST['scelta_c']))
         $scelta="c";
     else if (isset($_POST['scelta_d'])) 
         $scelta="d";
@@ -20,18 +29,9 @@
         $scelta="h";
     else if (isset($_POST['scelta_s'])) 
         $scelta="s";
-    else if(isset($_POST['seme'])){
-        $scelta=$_POST['seme'];
-        giraCarta();
-    }
     else
         echo "Qualcosa è andato storto";
     
-
-    $carte = explode(',', $_POST["carte"]);
-    $posizioni = explode(',', $_POST["posizioni"]);
-    $carta_girata = null;
-
     function tuttiMaggiori($arr, $num){
         foreach ($arr as $pos) 
             if ($pos <= $num) 

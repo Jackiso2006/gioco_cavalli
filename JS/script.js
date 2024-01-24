@@ -19,6 +19,6 @@ window.onload = () => {
     }
     document.getElementById("carte").value = carte.toString();
 
-    initPos = [1,2,3,4];
+    initPos = [0,0,0,0];
     document.getElementById("posizioni").value = initPos.toString();
 }
