@@ -13,6 +13,8 @@
     <?php
     $carte = explode(',', $_POST["carte"]);
     $posizioni = explode(',', $_POST["posizioni"]);
+    $carteSX = explode(',', $_POST["carteSX"]);
+    $carteSxGirate = explode(',', $_POST["carteSxTurn"]);
     $carta_girata = null;
     $scelta = "";
 
@@ -32,11 +34,17 @@
     else
         echo "Qualcosa è andato storto";
     
-    function tuttiMaggiori($arr, $num){
-        foreach ($arr as $pos) 
-            if ($pos <= $num) 
-                return false;
-        return true;
+    function tuttiMaggiori(){
+        global $posizioni;
+        global $carteSxGirate;
+        $num = min($posizioni);
+        if($num != 0){
+            for($k=0; $k<$num; $k++)
+                if($carteSxGirate[$k] == '0'){
+                    $carteSxGirate[$k] = '1';
+                    giraCartaSX($k);
+                } 
+        }
     }
 
     function giraCarta(){
@@ -52,6 +60,20 @@
             case 's': $posizioni[3]++; controllaVittoria(3, 's'); break;
         }
         
+        tuttiMaggiori();
+    }
+
+    function giraCartaSX($pos){
+        global $carteSX;
+        global $posizioni;
+        $carta_girata = $carteSX[5-$pos];
+        switch($carta_girata[3]){
+            case 'c': $posizioni[0]++; controllaVittoria(0, 'c'); break;
+            case 'd': $posizioni[1]++; controllaVittoria(1, 'd'); break;
+            case 'h': $posizioni[2]++; controllaVittoria(2, 'h'); break;
+            case 's': $posizioni[3]++; controllaVittoria(3, 's'); break;
+        }
+        tuttiMaggiori();
     }
 
     function controllaVittoria($i, $seme){
@@ -59,9 +81,11 @@
         global $scelta;
         if($posizioni[$i]>5)
             if($seme==$scelta)
-                echo "ABBIAMO UN VINCITORE!!!";
+                echo "<div><h1>Il cavallo su cui hai scommesso è arrivato primo!!!</h1>
+                    <button id='esci'>ESCI</button></div>";
             else
-                echo "Mi spiace hai perso";
+                echo "<div><h1>Il cavallo su cui hai scommesso ha perso, mi spiace</h1>
+                <button id='esci'>ESCI</button></div>";
     }
     
     ?>
@@ -72,9 +96,10 @@
             echo "<div>";
             for($j=0; $j<6; $j++){
                 if($i == 0){
-                    //if(!tuttiMaggiori($posizioni , $j)) // controllo per girare le carte a sinistra
+                    if($carteSxGirate[5-$j] == '0')
                         echo "<div class='card'><img src='../IMG/dorso.JPG'></div>";
-                    // else ...
+                    else
+                        echo "<div class='card'><img src='../IMG/". $carteSX[$j] . "'></div>";
                 }
                 else{
                     if($posizioni[$i - 1] == 5 - $j)
@@ -100,6 +125,8 @@
         echo "   <input type='hidden' id='carte' name='carte' value=". implode(",", $carte) .">
                 <input type='hidden' id='posizioni' name='posizioni' value=". implode(",", $posizioni) .">
                 <input type='hidden' id='seme' name='seme' value=". $scelta .">
+                <input type='hidden' id='carteSX' name='carteSX' value=". implode(",", $carteSX) .">
+                <input type='hidden' id='carteSxTurn' name='carteSxTurn' value=". implode(",", $carteSxGirate) .">
             </form>";
     ?>
    </main> 

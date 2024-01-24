@@ -17,7 +17,11 @@ window.onload = () => {
         const j = Math.floor(Math.random() * (i + 1));
         [carte[i], carte[j]] = [carte[j], carte[i]];
     }
+    let carteNascoste = carte.slice(0, 6);
+    carte = carte.slice(6,carte.length);
+
     document.getElementById("carte").value = carte.toString();
+    document.getElementById("carteSX").value = carteNascoste.toString();
 
     initPos = [0,0,0,0];
     document.getElementById("posizioni").value = initPos.toString();
