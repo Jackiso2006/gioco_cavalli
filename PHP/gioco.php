@@ -79,13 +79,18 @@
     function controllaVittoria($i, $seme){
         global $posizioni;
         global $scelta;
-        if($posizioni[$i]>5)
-            if($seme==$scelta)
-                echo "<div><h1>Il cavallo su cui hai scommesso è arrivato primo!!!</h1>
-                    <button id='esci'>ESCI</button></div>";
-            else
-                echo "<div><h1>Il cavallo su cui hai scommesso ha perso, mi spiace</h1>
-                <button id='esci'>ESCI</button></div>";
+    
+        if($posizioni[$i] > 5) {
+            $bodyClass = $seme == $scelta ? 'winning' : 'losing';
+    
+            echo "<body class='$bodyClass'>";
+            echo "<div class='fine'>
+                    <h1>" . ($seme == $scelta ? "Il cavallo su cui hai scommesso è arrivato primo!!!" : "Il cavallo su cui hai scommesso ha perso, ma non perdere mai la fiducia!!") . "</h1>
+                    <button id='esci'>CONTINUA</button>
+                  </div>";
+            echo "</body>";
+            return;
+        }
     }
     
     ?>
@@ -116,13 +121,13 @@
             echo "</div>";
         }
         // stampo il mazzo
-        echo "<form action='./gioco.php' method='post'>
-                <button name='scelta_c'><img src='../IMG/dorso.JPG'></button>";
+        echo "<form action='./gioco.php' method='post'>";
 
         if($carta_girata != null)
-        echo "<div><img src='../IMG/". $carta_girata ."'></div>";
+            echo "<div class='card'><img src='../IMG/". $carta_girata ."'></div>";
         
-        echo "   <input type='hidden' id='carte' name='carte' value=". implode(",", $carte) .">
+        echo "  <button name='scelta' class='card'><img src='../IMG/dorso.JPG'></button>
+                <input type='hidden' id='carte' name='carte' value=". implode(",", $carte) .">
                 <input type='hidden' id='posizioni' name='posizioni' value=". implode(",", $posizioni) .">
                 <input type='hidden' id='seme' name='seme' value=". $scelta .">
                 <input type='hidden' id='carteSX' name='carteSX' value=". implode(",", $carteSX) .">
